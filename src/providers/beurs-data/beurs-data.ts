@@ -22,11 +22,11 @@ export class BeursDataProvider {
     }
 
     return new Promise(resolve => {
-      this.http.get('https://dacques.cloudant.com/jobbeurs/_all_docs?include_docs=true')
+      this.http.get('https://dacques.cloudant.com/jobbeurs/data')
         .subscribe(data => {
           this.data = data;
-          //console.log(this.data.rows[0].doc.companyinfo);
-          resolve(this.data.rows[0].doc.companyinfo);
+          console.log(data);
+          resolve(data);
         });
     });
   }

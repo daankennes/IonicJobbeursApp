@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ItemSliding } from 'ionic-angular';
+import { NavController, ModalController, ItemSliding, AlertController } from 'ionic-angular';
 import { CompaniesFilterPage } from '../companies-filter/companies-filter';
 import { CompanyDetailPage } from '../company-detail/company-detail';
 import { BeursDataProvider } from '../../providers/beurs-data/beurs-data';
@@ -14,25 +14,32 @@ export class HomePage {
     companies;
     groupedCompanies = [];
     excludeGroups = [];
+    favoriteCompanies = [];
     segment;
 
-    constructor(public navCtrl: NavController, public modalCtrl: ModalController, public beursDataProv: BeursDataProvider) {
+    constructor(public navCtrl: NavController, public modalCtrl: ModalController, public beursDataProv: BeursDataProvider, public alertCtrl: AlertController) {
 
         this.segment = "all";
         this.excludeGroups = [];
+        this.favoriteCompanies = [];
 
         /*this.companies = this.beursDataProv.load().then(function(value) {
           this.groupCompanies(value);
         }, function(err) {
           console.log(err);
         });*/
+        this.beursDataProv.load().then(data => {
+          //console.log(data.companyinfo);
+          this.companies = data.companyinfo;
+          this.groupCompanies(this.companies);
+        });
 
-        this.companies = [
+        /*this.companies = [
           {"name": "3-it bvba", "categories": ["G", "Y", "R", "B", "GR"], "description": "Test", "standno": 4},
           {"name": "Acco Accountants bvba", "categories": ["G"], "description": "", "standno": 6},
           {"name": "AC Partners", "categories": ["G", "Y", "R", "B"], "description": "", "standno": 2},
           {"name": "ACA IT-Solutions", "categories": ["Y", "B"], "description": "", "standno": 5}
-        ];
+        ];*/
 
         console.log(this.companies);
 
@@ -40,8 +47,77 @@ export class HomePage {
           this.companies.push({"name": "blabla" + i, "categories": ["G", "Y", "R", "B", "GR"], "description": "", "standno": 5});
         }*/
 
-        this.groupCompanies(this.companies);
+        //this.groupCompanies(this.companies);
 
+    }
+
+    segmentChanged(){
+
+      //slidingItem.close(); close all open items?
+
+      if (this.segment == "favorites" && this.favoriteCompanies.length < 1){
+        let alert = this.alertCtrl.create({
+          title: 'Favorieten',
+          subTitle: 'Nog geen favorieten toegevoegd.',
+          buttons: [{
+            text: 'Oké',
+          }]
+        });
+        this.segment = "all"; //geeft nog visuele fout: lijkt alsof favorieten nog steeds geselecteerd is
+        console.log(this.segment);
+        alert.present();
+      }
+    }
+
+    addFavorite(slidingItem: ItemSliding, companyData: any) {
+
+      if (this.favoriteCompanies.indexOf(companyData) > -1) {
+        this.removeFavorite(slidingItem, companyData, 'Favoriet al toegevoegd');
+      }
+      else {
+        this.favoriteCompanies.push(companyData);
+
+        // create an alert instance
+        let alert = this.alertCtrl.create({
+          title: 'Favorieten',
+          message: 'Favoriet toegevoegd.',
+          buttons: [{
+            text: 'Oké',
+            handler: () => {
+              // close the sliding item
+              slidingItem.close();
+            }
+          }]
+        });
+        // now present the alert on top of all other content
+        alert.present();
+      }
+
+    }
+
+    removeFavorite(slidingItem: ItemSliding, companyData: any, title: string) {
+      let alert = this.alertCtrl.create({
+        title: title,
+        message: 'Dit bedrijf uit favorieten verwijderen?',
+        buttons: [
+          {
+            text: 'Annuleren',
+            handler: () => {
+              slidingItem.close();
+            }
+          },
+          {
+            text: 'Verwijderen',
+            handler: () => {
+              let index = this.favoriteCompanies.indexOf(companyData);
+              this.favoriteCompanies.splice(index, 1);
+              slidingItem.close();
+            }
+          }
+        ]
+      });
+      // now present the alert on top of all other content
+      alert.present();
     }
 
     updateCompanies(){

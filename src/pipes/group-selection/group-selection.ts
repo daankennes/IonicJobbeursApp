@@ -45,7 +45,7 @@ export class GroupSelectionPipe implements PipeTransform {
 
   }
 
-  transform(items: any[], filter: Object): any {
+  transform(items: any[]): any {
       return items.filter(item => this.checkVisible(item) !== false);
     }
 }

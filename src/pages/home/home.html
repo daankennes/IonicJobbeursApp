@@ -11,7 +11,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateCompanies()">
+    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged()">
       <ion-segment-button value="all">
         Bedrijven
       </ion-segment-button>
@@ -39,13 +39,13 @@
 <ion-content>
 
   <div [ngSwitch]="segment">
-    <div  *ngSwitchCase="'all'">
+    <!--<div  *ngSwitchCase="'all'">-->
 
     <ion-list *ngFor="let group of groupedCompanies">
 
       <ion-item-divider light>{{group.letter}}</ion-item-divider>
       <!--<ion-item *ngFor="let company of group.companies">{{company}}</ion-item>-->
-      <ion-item-sliding *ngFor="let company of group.companies | groupSelection | fullTextSearch:queryText:'name'" #slidingItem>
+      <ion-item-sliding *ngFor="let company of group.companies | favoriteSelection | groupSelection | fullTextSearch:queryText:'name'" #slidingItem>
         <ion-item (click)="goToCompanyDetail(company)">
           <div style="float:left;">
 
@@ -71,7 +71,7 @@
       </ion-item-sliding>
     </ion-list>
 
-  </div>
+  <!--</div>-->
 </div>
 
 </ion-content>
