@@ -15,6 +15,7 @@ export class HomePage {
     groupedCompanies = [];
     excludeGroups = [];
     favoriteCompanies = [];
+    searchableList = [];
     segment;
 
     constructor(public navCtrl: NavController, public modalCtrl: ModalController, public beursDataProv: BeursDataProvider, public alertCtrl: AlertController) {
@@ -23,37 +24,20 @@ export class HomePage {
         this.excludeGroups = [];
         this.favoriteCompanies = [];
 
-        /*this.companies = this.beursDataProv.load().then(function(value) {
-          this.groupCompanies(value);
-        }, function(err) {
-          console.log(err);
-        });*/
         this.beursDataProv.load().then(data => {
-          //console.log(data.companyinfo);
           this.companies = data.companyinfo;
           this.groupCompanies(this.companies);
         });
 
-        /*this.companies = [
-          {"name": "3-it bvba", "categories": ["G", "Y", "R", "B", "GR"], "description": "Test", "standno": 4},
-          {"name": "Acco Accountants bvba", "categories": ["G"], "description": "", "standno": 6},
-          {"name": "AC Partners", "categories": ["G", "Y", "R", "B"], "description": "", "standno": 2},
-          {"name": "ACA IT-Solutions", "categories": ["Y", "B"], "description": "", "standno": 5}
-        ];*/
+        this.searchableList = ['name','description'];
 
         console.log(this.companies);
-
-        /*for (let i = 0; i < 100; i++){
-          this.companies.push({"name": "blabla" + i, "categories": ["G", "Y", "R", "B", "GR"], "description": "", "standno": 5});
-        }*/
-
-        //this.groupCompanies(this.companies);
 
     }
 
     segmentChanged(){
 
-      //slidingItem.close(); close all open items?
+      //slidingItem.close(); close all open items
 
       if (this.segment == "favorites" && this.favoriteCompanies.length < 1){
         let alert = this.alertCtrl.create({
@@ -153,6 +137,8 @@ export class HomePage {
         this.groupedCompanies = [];
 
         sortedCompanies.forEach((value, index) => {
+
+            //value.name = value.charAt(0).toUpperCase() + value.slice(1);
 
             for (let j = 0; j < value.categories.length; j++){
               let currentColor = value.categories[j];

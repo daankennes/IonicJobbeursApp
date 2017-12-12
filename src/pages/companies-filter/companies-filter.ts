@@ -15,8 +15,8 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class CompaniesFilterPage {
 
-  filterNames = [{"name": "Groen", "lookup": "G"}, {"name": "Geel", "lookup": "Y"}, {"name": "Rood", "lookup": "R"}, {"name": "Blauw", "lookup": "B"}, {"name": "Grijs", "lookup": "GR"}];
-  filters: Array<{name: string, isChecked: boolean, lookup: string}> = [];
+  filterNames = [{"name": "Bedrijfsmanagement, Office Management & Communicatie", "lookup": "G"}, {"name": "ICT Multimedia & Grafische en Digitale Media", "lookup": "Y"}, {"name": "Wetenschappen & Techniek", "lookup": "R"}, {"name": "Toegepaste Informatica & Electronica ICT", "lookup": "B"}, {"name": "Gezondheid & Onderwijs", "lookup": "GR"}];
+  filters: Array<{name: string, isChecked: boolean, lookup: string }> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
 
