@@ -18,6 +18,8 @@ export class HomePage {
     favoriteCompanies = [];
     searchableList = [];
     segment;
+    waiting: boolean = true;
+    i = 0;
 
     constructor(public navCtrl: NavController, public modalCtrl: ModalController, public beursDataProv: BeursDataProvider, public alertCtrl: AlertController, private storage: Storage, public events: Events) {
 
@@ -38,6 +40,14 @@ export class HomePage {
         this.searchableList = ['name','description'];
 
     }
+
+    loadingReady(){
+      this.waiting = false;
+    }
+
+    /*startLoading(){
+      this.waiting = true;
+    }*/
 
     //add a favorite company, ask to remove favorite company if already favorite
     addFavorite(slidingItem: ItemSliding, companyData: any) {
@@ -161,6 +171,7 @@ export class HomePage {
         this.groupedCompanies = value;
         console.log("saved grouped companyinfo found");
         found = true;
+        //this.waiting = false;
       }
     }).then(() => {
         if (!found){
@@ -169,6 +180,7 @@ export class HomePage {
               this.groupedCompanies = data;
               this.saveData(this.groupedCompanies);
               console.log(data);
+              //this.waiting = false;
               //this.groupCompanies(this.companies);
           });
         }

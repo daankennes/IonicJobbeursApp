@@ -22,7 +22,7 @@
 
     <ion-buttons end>
       <button ion-button icon-only (click)="presentFilter()">
-        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+        <ion-icon name="ios-arrow-dropdown-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -30,15 +30,8 @@
   <ion-toolbar no-border-top>
     <ion-searchbar color="primary"
                    [(ngModel)]="queryText"
-                   (ionInput)="updateCompanies()"
                    placeholder="Zoeken">
     </ion-searchbar>
-    <div *ngIf="excludeGroups.length > 0">
-      <p text-center ion-text>
-        Weggefilterd:
-        <span *ngFor="let exItem of excludeGroups" item-start style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-left: 3px;margin-right: 3px;" [style.background-color]="exItem"></span>
-      </p>
-    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -46,35 +39,46 @@
 
   <div [ngSwitch]="segment">
     <!--<div  *ngSwitchCase="'all'">-->
+    <div *ngIf="excludeGroups.length > 0">
+      <p text-center ion-text>
+        Weggefilterd:
+        <span *ngFor="let exItem of excludeGroups" item-start style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-left: 3px;margin-right: 3px;" [style.background-color]="exItem"></span>
+      </p>
+    </div>
     <h5 text-center ion-text color="primary" *ngIf="segment == 'favorites' && favoriteCompanies.length < 1">Je hebt nog geen favorieten toegevoegd.</h5>
-
+    <div *ngIf="waiting" text-center ion-text class="spinner-container">
+        <p></p>
+        <ion-spinner></ion-spinner>
+    </div>
     <ion-list *ngFor="let group of groupedCompanies">
 
-      <ion-item-divider *ngIf="1 > 0" light>{{group.letter}}</ion-item-divider>
 
-      <ion-item-sliding *ngFor="let company of group.companies | groupSelection | favoriteSelection | fullTextSearch:queryText:searchableList" #slidingItem>
+      <ion-item-divider *ngIf="0 == 0" light>{{group.letter}}</ion-item-divider>
+      <ion-item-sliding *ngFor="let company of group.companies | groupSelection | favoriteSelection | fullTextSearch:queryText:searchableList; let last = last; let i = index;" #slidingItem>
+
         <ion-item (click)="goToCompanyDetail(company)">
           <div style="float:left;">
 
             <div *ngFor="let category of company.categories" style="float:left;">
               <canvas width="4" height="38" [ngStyle]="{'background': category}"></canvas>
-              <div class="horizontalgap" style="width:8px"></div>
+              <div style="width:8px"></div>
             </div>
 
           </div>
-          <div style="padding-left: 45px;">
+          <div style="padding-left: 40px;">
             <h3>{{company.name}}</h3>
             <p>Standnummer: {{company.standno}}</p>
           </div>
         </ion-item>
         <ion-item-options>
           <button ion-button color="favorite" (click)="addFavorite(slidingItem, company)" *ngIf="segment === 'all'">
-            <ion-icon name="ios-heart-outline"></ion-icon>Favoriet
+            <ion-icon name="md-heart"></ion-icon>Favoriet
           </button>
           <button ion-button color="danger" (click)="removeFavorite(slidingItem, company, 'Verwijder favoriet')" *ngIf="segment === 'favorites'">
-            <ion-icon name="ios-remove-circle-outline"></ion-icon>Verwijder
+            <ion-icon name="md-remove-circle"></ion-icon>Verwijder
           </button>
         </ion-item-options>
+        <span *ngIf="last">{{loadingReady()}}</span>
       </ion-item-sliding>
     </ion-list>
 

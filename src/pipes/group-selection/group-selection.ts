@@ -15,7 +15,6 @@ export class GroupSelectionPipe implements PipeTransform {
   excludeGroups = [];
 
   constructor(public home: HomePage) {
-
   }
 
   checkVisible(company){
