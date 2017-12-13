@@ -19,17 +19,15 @@ export class GroupSelectionPipe implements PipeTransform {
   }
 
   checkVisible(company){
-    /*console.log(this.excludeGroups);
-    console.log(company);*/
 
-    if (this.excludeGroups.length > 0 && company){ //company sometimes undefined?
+    if (this.home.excludeGroups.length > 0 && company){ //company sometimes undefined?
 
       let count = 0;
 
-      for (let s = 0; s < this.excludeGroups.length; s++){
+      for (let s = 0; s < this.home.excludeGroups.length; s++){
         //console.log(company.categories.indexOf(this.excludeGroups[s]));
         //if (company.categories.findIndex(str => str == this.excludeGroups[s])) count++;
-        if (company.categories.indexOf(this.excludeGroups[s]) > -1) count++ && console.log("aanwezig");
+        if (company.categories.indexOf(this.home.excludeGroups[s]) > -1) count++;
       }
 
       if (count == company.categories.length) return false;
@@ -39,19 +37,8 @@ export class GroupSelectionPipe implements PipeTransform {
 
   }
 
-  buildArray(){
-
-    this.excludeGroups = [];
-
-    if (this.home.excludeGroups.indexOf("R") > -1) this.excludeGroups.push("#FE4C52");
-    if (this.home.excludeGroups.indexOf("Y") > -1) this.excludeGroups.push("#FED035");
-    if (this.home.excludeGroups.indexOf("G") > -1) this.excludeGroups.push("#69BB7B");
-    if (this.home.excludeGroups.indexOf("B") > -1) this.excludeGroups.push("#0059ff");
-    if (this.home.excludeGroups.indexOf("GR") > -1) this.excludeGroups.push("#8E8D93");
-  }
-
   transform(items: any[]): any {
-    this.buildArray();
+    //console.log("group selection pipe");
     return items.filter(item => this.checkVisible(item) !== false);
   }
 }

@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
 
     companies;
-    groupedCompanies = [];
+    groupedCompanies;
     excludeGroups = [];
     favoriteCompanies = [];
     searchableList = [];
@@ -37,28 +37,6 @@ export class HomePage {
         //set searchable company items for full text search
         this.searchableList = ['name','description'];
 
-    }
-
-    /*ionViewWillEnter(){
-      this.checkData();
-    }*/
-
-    //check if favorite segment has been selected, show message if no favorites are available
-    segmentChanged(){
-
-      //slidingItem.close(); close all open items
-
-      if (this.segment == "favorites" && this.favoriteCompanies.length < 1){
-        let alert = this.alertCtrl.create({
-          title: 'Favorieten',
-          subTitle: 'Nog geen favorieten toegevoegd.',
-          buttons: [{
-              text: 'Oké',
-            }]
-          });
-        alert.present();
-        this.segment = "all"; //geeft nog visuele fout: lijkt alsof favorieten nog steeds geselecteerd is
-      }
     }
 
     //add a favorite company, ask to remove favorite company if already favorite
@@ -123,7 +101,6 @@ export class HomePage {
       this.storage.forEach( (value, key, index) => {
         if (key === "favoriteCompanies"){
           this.favoriteCompanies = value;
-          console.log(this.favoriteCompanies);
           console.log("got favorite companies");
           found = true;
         }
@@ -134,11 +111,6 @@ export class HomePage {
         }, (err) => {
             console.log(err);
       });
-    }
-
-    updateCompanies(){
-      /*console.log("update companies");
-      console.log(this.excludeGroups);*/
     }
 
     //open page with company details
@@ -179,60 +151,7 @@ export class HomePage {
       });
     }
 
-    //use raw company array to create array grouped by first letter for presentation
-    groupCompanies(companies){
-
-        let sortedCompanies = companies.sort(function(a, b) {
-            return a.name.localeCompare(b.name);
-        });
-        let currentLetter = false;
-        let currentCompanies = [];
-
-        this.groupedCompanies = [];
-
-        sortedCompanies.forEach((value, index) => {
-
-            //value.name = value.charAt(0).toUpperCase() + value.slice(1);
-
-            for (let j = 0; j < value.categories.length; j++){
-              let currentColor = value.categories[j];
-
-              if (currentColor == "R")
-                value.categories[j] = "#FE4C52";
-              if (currentColor == "Y")
-                value.categories[j] = "#FED035";
-              if (currentColor == "G")
-                value.categories[j] = "#69BB7B";
-              if (currentColor == "B")
-                value.categories[j] = "#0059ff";
-              if (currentColor == "GR")
-                value.categories[j] = "#8E8D93";
-
-            }
-
-            if(value.name.charAt(0) != currentLetter){
-
-                currentLetter = value.name.charAt(0);
-
-                let newGroup = {
-                    letter: currentLetter,
-                    companies: []
-                };
-
-                currentCompanies = newGroup.companies;
-                this.groupedCompanies.push(newGroup);
-
-            }
-
-            currentCompanies.push(value);
-
-        });
-
-        this.saveData();
-        console.log(this.groupedCompanies);
-    }
-
-    //check if grouped company data is already available if storage, if not download the data
+    //check if grouped company data is already available in storage, if not download the data
     checkData() {
 
     var found = false;
@@ -247,8 +166,10 @@ export class HomePage {
         if (!found){
           this.beursDataProv.load()
             .then(data => {
-              this.companies = data.companyinfo;
-              this.groupCompanies(this.companies);
+              this.groupedCompanies = data;
+              this.saveData(this.groupedCompanies);
+              console.log(data);
+              //this.groupCompanies(this.companies);
           });
         }
       }, (err) => {
@@ -258,8 +179,8 @@ export class HomePage {
   }
 
   //save the grouped company data to storage
-  saveData(){
-      this.storage.set("groupedCompanyInfo", this.groupedCompanies);
+  saveData(groupedCompanies){
+      this.storage.set("groupedCompanyInfo", groupedCompanies);
       console.log("saved grouped company data to storage");
   }
 

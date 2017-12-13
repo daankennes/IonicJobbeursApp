@@ -11,7 +11,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: false
 })
 export class FullTextSearchPipe implements PipeTransform {
-
   constructor() { }
 
   /*transform(value: any, query: string, field: string): any {

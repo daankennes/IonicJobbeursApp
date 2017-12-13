@@ -11,7 +11,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged()">
+    <ion-segment [(ngModel)]="segment">
       <ion-segment-button value="all">
         Bedrijven
       </ion-segment-button>
@@ -33,6 +33,12 @@
                    (ionInput)="updateCompanies()"
                    placeholder="Zoeken">
     </ion-searchbar>
+    <div *ngIf="excludeGroups.length > 0">
+      <p text-center ion-text>
+        Weggefilterd:
+        <span *ngFor="let exItem of excludeGroups" item-start style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-left: 3px;margin-right: 3px;" [style.background-color]="exItem"></span>
+      </p>
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -40,6 +46,7 @@
 
   <div [ngSwitch]="segment">
     <!--<div  *ngSwitchCase="'all'">-->
+    <h5 text-center ion-text color="primary" *ngIf="segment == 'favorites' && favoriteCompanies.length < 1">Je hebt nog geen favorieten toegevoegd.</h5>
 
     <ion-list *ngFor="let group of groupedCompanies">
 
