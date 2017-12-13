@@ -19,7 +19,7 @@ export class FavoriteSelectionPipe implements PipeTransform {
 
     if (this.home.segment == "favorites"){
       if (this.home.favoriteCompanies.length < 1) return false;
-      else if (this.home.favoriteCompanies.indexOf(company) > -1) return true;
+      else if (this.home.favoriteCompanies.findIndex(obj => obj.name == company.name) > -1) return true;
       else return false;
     }
     else {

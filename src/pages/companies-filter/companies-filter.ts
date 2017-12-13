@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the CompaniesFilterPage page.
@@ -8,7 +8,6 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-companies-filter',
   templateUrl: 'companies-filter.html',
@@ -29,7 +28,7 @@ export class CompaniesFilterPage {
             lookup: filterName.lookup
           });
         });
-        console.log(excludeGroups);
+        //console.log(excludeGroups);
   }
 
   resetFilters() {

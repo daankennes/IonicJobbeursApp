@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AlertController, Events } from 'ionic-angular';
 
 /*
   Generated class for the BeursDataProvider provider.
@@ -12,7 +13,7 @@ export class BeursDataProvider {
 
   data: any;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private alertCtrl: AlertController, public events: Events) {
     this.data = null;
   }
 
@@ -25,8 +26,22 @@ export class BeursDataProvider {
       this.http.get('https://dacques.cloudant.com/jobbeurs/data')
         .subscribe(data => {
           this.data = data;
-          console.log(data);
           resolve(data);
+        },
+        err => {
+          let alert = this.alertCtrl.create({
+            title: 'Data onbereikbaar',
+            subTitle: "Kan benodigde data niet downloaden. Internetverbinding beschikbaar?",
+            buttons: [
+            {
+              text: 'Opnieuw proberen',
+              handler: () => {
+                this.events.publish('downloadfailed');
+              }
+            }
+          ]
+          });
+          alert.present();
         });
     });
   }

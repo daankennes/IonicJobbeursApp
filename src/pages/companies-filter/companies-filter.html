@@ -19,6 +19,7 @@
   <ion-list>
 
     <ion-item *ngFor="let filter of filters">
+      <span item-start style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px;" [style.background-color]="'filter.lookup'"></span>
       <ion-label>{{filter.name}}</ion-label>
       <ion-toggle [(ngModel)]="filter.isChecked" color="{{filter.lookup}}" ></ion-toggle>
     </ion-item>

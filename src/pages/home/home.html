@@ -45,7 +45,7 @@
 
       <ion-item-divider *ngIf="1 > 0" light>{{group.letter}}</ion-item-divider>
 
-      <ion-item-sliding *ngFor="let company of group.companies | favoriteSelection | groupSelection | fullTextSearch:queryText:searchableList" #slidingItem>
+      <ion-item-sliding *ngFor="let company of group.companies | groupSelection | favoriteSelection | fullTextSearch:queryText:searchableList" #slidingItem>
         <ion-item (click)="goToCompanyDetail(company)">
           <div style="float:left;">
 
