@@ -17,18 +17,17 @@
 <ion-content class="outer-content">
 
   <ion-list>
-    <ion-list-header>Filters</ion-list-header>
 
-    <ion-item *ngFor="let filter of filters" [attr.track]="filter.name | lowercase">
-      <span item-start class="dot"></span>
+    <ion-item *ngFor="let filter of filters">
+      <span item-start style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px;" [style.background-color]="filter.color"></span>
       <ion-label>{{filter.name}}</ion-label>
-      <ion-toggle [(ngModel)]="filter.isChecked" color="secondary"></ion-toggle>
+      <ion-toggle [(ngModel)]="filter.isChecked" color="{{filter.lookup}}" ></ion-toggle>
     </ion-item>
 
   </ion-list>
 
   <ion-list>
-    <button ion-item (click)="resetFilters()" detail-none class="reset-filters">
+    <button ion-item (click)="resetFilters()" detail-none>
       Filters resetten
     </button>
   </ion-list>

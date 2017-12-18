@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the CompaniesFilterPage page.
@@ -8,15 +8,14 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-companies-filter',
   templateUrl: 'companies-filter.html',
 })
 export class CompaniesFilterPage {
 
-  filterNames = [{"name": "Groen", "lookup": "G"}, {"name": "Geel", "lookup": "Y"}, {"name": "Rood", "lookup": "R"}, {"name": "Blauw", "lookup": "B"}, {"name": "Grijs", "lookup": "GR"}];
-  filters: Array<{name: string, isChecked: boolean, lookup: string}> = [];
+  filterNames = [{"name": "Bedrijfsmanagement, Office Management & Communicatie", "color": "#69BB7B", "lookup": "G"}, {"name": "ICT Multimedia & Grafische en Digitale Media", "color": "#FED035", "lookup": "Y"}, {"name": "Wetenschappen & Techniek", "color": "#FE4C52", "lookup": "R"}, {"name": "Toegepaste Informatica & Electronica ICT", "color": "#0059ff", "lookup": "B"}, {"name": "Gezondheid & Onderwijs", "color": "#8E8D93", "lookup": "GR"}];
+  filters: Array<{name: string, isChecked: boolean, color: string, lookup: string }> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
 
@@ -25,11 +24,11 @@ export class CompaniesFilterPage {
         this.filterNames.forEach(filterName => {
           this.filters.push({
             name: filterName.name,
-            isChecked: (excludeGroups.indexOf(filterName.lookup) === -1),
+            isChecked: (excludeGroups.indexOf(filterName.color) === -1),
+            color: filterName.color,
             lookup: filterName.lookup
           });
         });
-        console.log(excludeGroups);
   }
 
   resetFilters() {
@@ -41,7 +40,7 @@ export class CompaniesFilterPage {
 
   applyFilters() {
     // Pass back a new array of track names to exclude
-    let excludeGroups = this.filters.filter(c => !c.isChecked).map(c => c.lookup);
+    let excludeGroups = this.filters.filter(c => !c.isChecked).map(c => c.color);
     this.dismiss(excludeGroups);
   }
 
