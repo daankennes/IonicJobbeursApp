@@ -15,10 +15,20 @@
 
 <ion-content padding>
   <div *ngIf="company">
-    <h1>{{company.name}}</h1>
-    <p>Beschrijving bedrijf: </p>
-    <p>{{company.description}}</p>
-    <p>Standnummer: {{company.standno}}</p>
-    <p *ngFor="let category of company.categories">{{category}}</p>
+	<h1>{{company.name}}</h1><br/>
+	
+	<b>standnummer:</b> {{company.standno}} <br/>
+	<p *ngFor="let category of company.categories">{{category}}</p> <br/>
+	{{company.description}} <br/>
+	
+	<b>contact info: </b><br/>
+	{{company.email}} <br/>
+	{{company.telephone}} <br/>
+	{{company.contact}} <br/><br/>
+	
+	<b>address:</b> <br/>
+	{{company.address}} <br/>
+	{{company.postal}}, {{company.city}} <br/><br/>
+	
   </div>
 </ion-content>
