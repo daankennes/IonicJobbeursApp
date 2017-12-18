@@ -15,11 +15,11 @@
 
 <ion-content padding>
   <div *ngIf="company">
-	<h1>{{company.name}}</h1><br/>
+	<h1>{{company.name}}</h1>
+	standnummer: {{company.standno}}<br/><br/>
 	
-	<b>standnummer:</b> {{company.standno}} <br/>
-	<p *ngFor="let category of company.categories">{{category}}</p> <br/>
-	{{company.description}} <br/>
+	<b>beschrijvng:</b><br/>
+	{{company.description}} <br/><br/>
 	
 	<b>contact info: </b><br/>
 	{{company.email}} <br/>
@@ -29,6 +29,10 @@
 	<b>address:</b> <br/>
 	{{company.address}} <br/>
 	{{company.postal}}, {{company.city}} <br/><br/>
+	
+	<div *ngFor="let filter of filters">
+      <span item-start style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px;" [style.background-color]="filter.color"></span>{{filter.name}}
+    </div><br/>
 	
   </div>
 </ion-content>
