@@ -17,22 +17,22 @@
   <div *ngIf="company">
 	<h1>{{company.name}}</h1>
 	standnummer: {{company.standno}}<br/><br/>
-	
-	<b>beschrijvng:</b><br/>
+
+	<b>Beschrijving:</b><br/>
 	{{company.description}} <br/><br/>
-	
-	<b>contact info: </b><br/>
+
+	<b>Contactinformatie:</b><br/>
 	{{company.email}} <br/>
 	{{company.telephone}} <br/>
 	{{company.contact}} <br/><br/>
-	
-	<b>address:</b> <br/>
+
+	<b>Adres:</b> <br/>
 	{{company.address}} <br/>
 	{{company.postal}}, {{company.city}} <br/><br/>
-	
+
 	<div *ngFor="let filter of filters">
       <span item-start style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px;" [style.background-color]="filter.color"></span>{{filter.name}}
     </div><br/>
-	
+
   </div>
 </ion-content>
