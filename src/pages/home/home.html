@@ -51,11 +51,9 @@
         <ion-spinner></ion-spinner>
     </div>
     <ion-list *ngFor="let group of groupedCompanies">
-
-
-      <ion-item-divider *ngIf="0 == 0" light>{{group.letter}}</ion-item-divider>
-      <ion-item-sliding *ngFor="let company of group.companies | groupSelection | favoriteSelection | fullTextSearch:queryText:searchableList; let last = last; let i = index;" #slidingItem>
-
+      <div *ngIf="{ filteredCompanies: group.companies | groupSelection | favoriteSelection | fullTextSearch:queryText:searchableList } as piped">
+      <ion-item-divider *ngIf="piped.filteredCompanies.length != 0" light>{{group.letter}}</ion-item-divider>
+      <ion-item-sliding *ngFor="let company of piped.filteredCompanies; let last = last; let i = index;"  #slidingItem>
         <ion-item (click)="goToCompanyDetail(company)">
           <div style="float:left;">
 
@@ -80,6 +78,7 @@
         </ion-item-options>
         <span *ngIf="last">{{loadingReady()}}</span>
       </ion-item-sliding>
+      </div>
     </ion-list>
 
   <!--</div>-->

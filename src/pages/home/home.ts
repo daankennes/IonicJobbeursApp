@@ -3,6 +3,7 @@ import { NavController, ModalController, ItemSliding, AlertController, Events } 
 import { CompaniesFilterPage } from '../companies-filter/companies-filter';
 import { CompanyDetailPage } from '../company-detail/company-detail';
 import { BeursDataProvider } from '../../providers/beurs-data/beurs-data';
+//import { GroupSelectionPipe } from '@angular/common';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -20,6 +21,7 @@ export class HomePage {
     segment;
     waiting: boolean = true;
     i = 0;
+    filteredCompanies;
 
     constructor(public navCtrl: NavController, public modalCtrl: ModalController, public beursDataProv: BeursDataProvider, public alertCtrl: AlertController, private storage: Storage, public events: Events) {
 
@@ -44,10 +46,6 @@ export class HomePage {
     loadingReady(){
       this.waiting = false;
     }
-
-    /*startLoading(){
-      this.waiting = true;
-    }*/
 
     //add a favorite company, ask to remove favorite company if already favorite
     addFavorite(slidingItem: ItemSliding, companyData: any) {
@@ -126,6 +124,7 @@ export class HomePage {
     //open page with company details
     goToCompanyDetail(companyData: any){
       this.navCtrl.push(CompanyDetailPage, companyData);
+      console.log(companyData);
     }
 
     //open page with company selection filters
