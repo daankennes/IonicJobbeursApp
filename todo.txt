@@ -1,0 +1,5 @@
+tutorial afbeeldingen bijwerken
+kaartje juist + correct positioneren
+filters niet volledig zichtbaar
+comments verwijderen
+console.log verwijderen

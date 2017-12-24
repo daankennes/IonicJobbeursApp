@@ -1,0 +1,71 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">Overslaan</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
+
+    <ion-slide>
+      <img src="assets/imgs/jobbeurs.png" class="slide-image"/>
+      <h2 class="slide-title">
+        Welkom op <b>Jobbeurs 2018</b>!
+      </h2>
+      <p>
+        <b>Artesis Plantijn Hogeschool</b> en <b>Karel de Grote Hogeschool</b> organiseren opnieuw een gezamenlijke jobbeurs voor hun professionele bachelors. Deze app leidt je rond!
+      </p>
+    </ion-slide>
+
+    <ion-slide>
+      <!--<img src="./assets/imgs/slidebox-color.png" class="slide-image"/>-->
+      <h2 class="slide-title">Van alle markten thuis!</h2>
+      <p><b>Verschillende kleuren</b> duiden de sector(en) van de bedrijven aan.</p>
+
+      <br>
+
+      <p><span style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px; background-color:#69BB7B;"></span>Bedrijfsmanagement, Office Management & Communicatie</p>
+      <p><span style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px; background-color:#FED035;"></span>ICT Multimedia & Grafische en Digitale Media</p>
+      <p><span style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px; background-color:#FE4C52;"></span>Wetenschappen & Techniek</p>
+      <p><span style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px; background-color:#0059ff;"></span>Toegepaste Informatica & Electronica ICT</p>
+      <p><span style="height: 10px;display: inline-block;width: 10px;border-radius: 5px;margin-right: 10px; background-color:#8E8D93;"></span>Gezondheid & Onderwijs</p>
+
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/imgs/slidebox-filter.gif" class="slide-image"/>
+      <h2 class="slide-title">Handig keuzes maken</h2>
+      <p>Tik op het <b>pijltje</b> om enkel sectoren die je interesseren weer te geven.</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/imgs/slidebox-details.gif" class="slide-image"/>
+      <h2 class="slide-title">Meer weten?</h2>
+      <p>Tik op een bedrijf om er <b>alles over te weten</b> te komen!</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/imgs/slidebox-favorite.gif" class="slide-image"/>
+      <h2 class="slide-title">Interessante job gespot?</h2>
+      <p>Swipe een bedrijf naar links en voeg het toe aan je <b>favorieten</b>. Zo vind je het snel terug!</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/imgs/slidebox-map.gif" class="slide-image"/>
+      <h2 class="slide-title">Vind je weg</h2>
+      <p>Open het kaartje om snel <b>je weg te vinden</b>.</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/imgs/slidebox-explore.gif" class="slide-image"/>
+      <h2 class="slide-title">Klaar om te ontdekken?</h2>
+      <button ion-button icon-end large clear (click)="startApp()">
+        Ga verder
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

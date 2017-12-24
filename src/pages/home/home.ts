@@ -40,7 +40,6 @@ export class HomePage {
 
         //set searchable company items for full text search
         this.searchableList = ['name','description'];
-
     }
 
     loadingReady(){
@@ -55,7 +54,8 @@ export class HomePage {
       }
       else {
         this.favoriteCompanies.push(companyData);
-        this.storage.set("favoriteCompanies", this.favoriteCompanies);
+        this.saveFavorites();
+        //this.storage.set("favoriteCompanies", this.favoriteCompanies);
         console.log(this.favoriteCompanies);
         // create an alert instance
         let alert = this.alertCtrl.create({
@@ -92,7 +92,7 @@ export class HomePage {
             handler: () => {
               let index = this.favoriteCompanies.findIndex(obj => obj.name == companyData.name);
               this.favoriteCompanies.splice(index, 1);
-              this.storage.set("favoriteCompanies", this.favoriteCompanies);
+              this.saveFavorites();
               slidingItem.close();
             }
           }
@@ -121,12 +121,6 @@ export class HomePage {
       });
     }
 
-    //open page with company details
-    goToCompanyDetail(companyData: any){
-      this.navCtrl.push(CompanyDetailPage, companyData);
-      console.log(companyData);
-    }
-
     //open page with company selection filters
     presentFilter() {
       let modal = this.modalCtrl.create(CompaniesFilterPage, this.excludeGroups);
@@ -139,6 +133,26 @@ export class HomePage {
         }
       });
 
+    }
+
+    //present company details
+    presentDetails(companyData: any) {
+      let modal = this.modalCtrl.create(CompanyDetailPage, { data: companyData, favoriteCompanies: this.favoriteCompanies });
+      modal.present();
+
+      modal.onWillDismiss((data: any[]) => {
+        console.log(companyData);
+        if (data) {
+          this.favoriteCompanies = data;
+          this.saveFavorites();
+        }
+      });
+
+    }
+
+    saveFavorites(){
+      this.storage.set("favoriteCompanies", this.favoriteCompanies);
+      console.log("Favorites saved");
     }
 
     //check if filter settings can be found in storage from previous use

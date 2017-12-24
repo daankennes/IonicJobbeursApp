@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the CompanyDetailPage page.
@@ -18,25 +18,56 @@ export class CompanyDetailPage {
   filters: Array<{name: string, color: string }> = [];
 
   company: any;
+  favorited: boolean = false;
+  favoriteCompanies: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-	  
-	  this.company = this.navParams.data;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
 
-        this.filterNames.forEach(filterName => {
-		  this.company.categories.forEach(color => {
-			if(color === filterName.color){
-			  this.filters.push({
-				name: filterName.name,
-				color: filterName.color
-			  })
-			}
-          });
-        });
+	  this.company = this.navParams.data.data;
+    this.favoriteCompanies = this.navParams.data.favoriteCompanies;
+
+    if (this.favoriteCompanies.findIndex(obj => obj.name == this.company.name) == -1) this.favorited = false;
+    else this.favorited = true;
+
+      this.filterNames.forEach(filterName => {
+  		  this.company.categories.forEach(color => {
+    			if(color === filterName.color){
+    			  this.filters.push({
+      				name: filterName.name,
+      				color: filterName.color
+            })
+  			  }
+        })
+      })
 	  }
 
   ionViewDidLoad() {
     console.log(this.company);
+  }
+
+  clickFavorite() {
+    if (this.favorited) {
+      this.favorited = false;
+      this.removeFavorite();
+    }
+    else {
+      this.favorited = true;
+      this.addFavorite();
+    }
+    console.log(this.favoriteCompanies);
+  }
+
+  addFavorite() {
+    if (this.favoriteCompanies.findIndex(obj => obj.name == this.company.name) == -1) this.favoriteCompanies.push(this.company);
+  }
+
+  removeFavorite() {
+    let index = this.favoriteCompanies.findIndex(obj => obj.name == this.company.name);
+    this.favoriteCompanies.splice(index, 1);
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss(this.favoriteCompanies);
   }
 
 }

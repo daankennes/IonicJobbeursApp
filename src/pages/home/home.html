@@ -52,13 +52,14 @@
     </div>
     <ion-list *ngFor="let group of groupedCompanies">
       <div *ngIf="{ filteredCompanies: group.companies | groupSelection | favoriteSelection | fullTextSearch:queryText:searchableList } as piped">
+      <!--nog melding weergeven als er geen resultaten zijn-->
       <ion-item-divider *ngIf="piped.filteredCompanies.length != 0" light>{{group.letter}}</ion-item-divider>
       <ion-item-sliding *ngFor="let company of piped.filteredCompanies; let last = last; let i = index;"  #slidingItem>
-        <ion-item (click)="goToCompanyDetail(company)">
+        <ion-item (click)="presentDetails(company)">
           <div style="float:left;">
 
             <div *ngFor="let category of company.categories" style="float:left;">
-              <canvas width="4" height="38" [ngStyle]="{'background': category}"></canvas>
+              <canvas width="4" height="40" [ngStyle]="{'background': category}"></canvas>
               <div style="width:8px"></div>
             </div>
 
