@@ -49,16 +49,16 @@
       <ion-icon name="md-contacts"></ion-icon>
       contactinformatie
     </ion-list-header>
-    <ion-item>Contactpersoon<p item-end>{{company.contact}}</p></ion-item>
-    <ion-item>Email<p item-end>{{company.email}}</p></ion-item>
-    <ion-item>Telefoon<p item-end>{{company.telephone}}</p></ion-item>
+    <ion-item (click)="copyToClipboard(company.contact)">Contactpersoon<p item-end>{{company.contact}}</p></ion-item>
+    <ion-item (click)="copyToClipboard(company.email)">Email<p item-end>{{company.email}}</p></ion-item>
+    <ion-item (click)="copyToClipboard(company.telephone)">Telefoon<p item-end>{{company.telephone}}</p></ion-item>
     <br>
     <ion-list-header class="item item-ios list-header list-header-ios">
       <ion-icon name="ios-navigate-outline"></ion-icon>
       adresinformatie
     </ion-list-header>
-    <ion-item>Plaats<p item-end>{{company.city}}, {{company.postal}}</p></ion-item>
-    <ion-item>Adres<p item-end>{{company.address}}</p></ion-item>
+    <ion-item (click)="copyToClipboard(company.city + ' (' + company.postal + ')')">Plaats<p item-end>{{company.city}}, {{company.postal}}</p></ion-item>
+    <ion-item (click)="copyToClipboard(company.address)">Adres<p item-end>{{company.address}}</p></ion-item>
   </ion-item-group>
   <hr>
   <br>

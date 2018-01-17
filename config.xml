@@ -3,7 +3,7 @@
     <name>Jobbeurs</name>
     <description>App voor Jobbeurs georganiseerd door AP Hogeschool en KDG</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.0.242:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -79,6 +79,7 @@
     <allow-navigation href="http://192.168.0.223:8100" />
     <allow-navigation href="http://192.168.31.188:8100" />
     <allow-navigation href="http://172.16.139.250:8100" />
+    <allow-navigation href="http://192.168.0.242:8100" />
     <engine name="android" spec="6.3.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
@@ -87,4 +88,5 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
+    <plugin name="cordova-clipboard" spec="^1.1.1" />
 </widget>

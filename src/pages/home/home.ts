@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ItemSliding, AlertController, Events } from 'ionic-angular';
+import { NavController, ModalController, ItemSliding, AlertController, Events, ToastController } from 'ionic-angular';
 import { CompaniesFilterPage } from '../companies-filter/companies-filter';
 import { CompanyDetailPage } from '../company-detail/company-detail';
 import { BeursDataProvider } from '../../providers/beurs-data/beurs-data';
@@ -23,7 +23,7 @@ export class HomePage {
     i = 0;
     filteredCompanies;
 
-    constructor(public navCtrl: NavController, public modalCtrl: ModalController, public beursDataProv: BeursDataProvider, public alertCtrl: AlertController, private storage: Storage, public events: Events) {
+    constructor(public navCtrl: NavController, public modalCtrl: ModalController, public beursDataProv: BeursDataProvider, public alertCtrl: AlertController, private storage: Storage, public events: Events, private toastCtrl: ToastController) {
 
         //set initial segment
         this.segment = "all";
@@ -56,9 +56,17 @@ export class HomePage {
         this.favoriteCompanies.push(companyData);
         this.saveFavorites();
         //this.storage.set("favoriteCompanies", this.favoriteCompanies);
-        console.log(this.favoriteCompanies);
+        slidingItem.close();
+        // show toast
+        let toast = this.toastCtrl.create({
+          message: 'Favoriet toegevoegd.',
+          duration: 1500,
+          position: 'bottom'
+        });
+
+        toast.present();
         // create an alert instance
-        let alert = this.alertCtrl.create({
+        /*let alert = this.alertCtrl.create({
           title: 'Favorieten',
           message: 'Favoriet toegevoegd.',
           buttons: [{
@@ -70,7 +78,7 @@ export class HomePage {
           }]
         });
         // now present the alert on top of all other content
-        alert.present();
+        alert.present();*/
       }
 
     }

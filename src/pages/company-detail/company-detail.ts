@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { Clipboard } from '@ionic-native/clipboard';
 
 /**
  * Generated class for the CompanyDetailPage page.
@@ -21,7 +22,7 @@ export class CompanyDetailPage {
   favorited: boolean = false;
   favoriteCompanies: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private clipboard: Clipboard, private toastCtrl: ToastController) {
 
 	  this.company = this.navParams.data.data;
     this.favoriteCompanies = this.navParams.data.favoriteCompanies;
@@ -59,15 +60,40 @@ export class CompanyDetailPage {
 
   addFavorite() {
     if (this.favoriteCompanies.findIndex(obj => obj.name == this.company.name) == -1) this.favoriteCompanies.push(this.company);
+    let toast = this.toastCtrl.create({
+      message: 'Favoriet toegevoegd.',
+      duration: 1500,
+      position: 'bottom'
+    });
+
+    toast.present();
   }
 
   removeFavorite() {
     let index = this.favoriteCompanies.findIndex(obj => obj.name == this.company.name);
     this.favoriteCompanies.splice(index, 1);
+    let toast = this.toastCtrl.create({
+      message: 'Favoriet verwijderd.',
+      duration: 1500,
+      position: 'bottom'
+    });
+
+    toast.present();
   }
 
   dismiss() {
     this.viewCtrl.dismiss(this.favoriteCompanies);
+  }
+
+  copyToClipboard(text) {
+    this.clipboard.copy(text);
+    let toast = this.toastCtrl.create({
+      message: 'Gekopieerd naar klembord.',
+      duration: 1500,
+      position: 'bottom'
+    });
+
+    toast.present();
   }
 
 }

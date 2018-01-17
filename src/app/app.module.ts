@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { File } from '@ionic-native/file';
+import { Clipboard } from '@ionic-native/clipboard';
 
 import { MapPage } from '../pages/map/map';
 import { HomePage } from '../pages/home/home';
@@ -54,6 +55,7 @@ import { BeursDataProvider } from '../providers/beurs-data/beurs-data';
     StatusBar,
     SplashScreen,
     File,
+    Clipboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BeursDataProvider
   ]
