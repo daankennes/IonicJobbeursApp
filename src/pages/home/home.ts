@@ -13,7 +13,6 @@ import { Storage } from '@ionic/storage';
 
 export class HomePage {
 
-    companies;
     groupedCompanies;
     excludeGroups = [];
     favoriteCompanies = [];
@@ -21,7 +20,6 @@ export class HomePage {
     segment;
     waiting: boolean = true;
     i = 0;
-    filteredCompanies;
 
     constructor(public navCtrl: NavController, public modalCtrl: ModalController, public beursDataProv: BeursDataProvider, public alertCtrl: AlertController, private storage: Storage, public events: Events, private toastCtrl: ToastController) {
 
@@ -117,7 +115,7 @@ export class HomePage {
       this.storage.forEach( (value, key, index) => {
         if (key === "favoriteCompanies"){
           this.favoriteCompanies = value;
-          console.log("got favorite companies");
+          //console.log("got favorite companies");
           found = true;
         }
       }).then(() => {
@@ -149,7 +147,7 @@ export class HomePage {
       modal.present();
 
       modal.onWillDismiss((data: any[]) => {
-        console.log(companyData);
+        //console.log(companyData);
         if (data) {
           this.favoriteCompanies = data;
           this.saveFavorites();
@@ -160,7 +158,7 @@ export class HomePage {
 
     saveFavorites(){
       this.storage.set("favoriteCompanies", this.favoriteCompanies);
-      console.log("Favorites saved");
+      //console.log("Favorites saved");
     }
 
     //check if filter settings can be found in storage from previous use
@@ -170,7 +168,7 @@ export class HomePage {
       this.storage.forEach( (value, key, index) => {
         if (key === "excludeGroups"){
           this.excludeGroups = value;
-          console.log("got excluded groups");
+          //console.log("got excluded groups");
           found = true;
         }
       }).then(() => {
@@ -190,7 +188,7 @@ export class HomePage {
     this.storage.forEach( (value, key, index) => {
       if (key === "groupedCompanyInfo"){
         this.groupedCompanies = value;
-        console.log("saved grouped companyinfo found");
+        //console.log("saved grouped companyinfo found");
         found = true;
         //this.waiting = false;
       }
@@ -200,7 +198,7 @@ export class HomePage {
             .then(data => {
               this.groupedCompanies = data;
               this.saveData(this.groupedCompanies);
-              console.log(data);
+              //console.log(data);
               //this.waiting = false;
               //this.groupCompanies(this.companies);
           });
@@ -214,7 +212,7 @@ export class HomePage {
   //save the grouped company data to storage
   saveData(groupedCompanies){
       this.storage.set("groupedCompanyInfo", groupedCompanies);
-      console.log("saved grouped company data to storage");
+      //console.log("saved grouped company data to storage");
   }
 
 

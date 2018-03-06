@@ -76,7 +76,7 @@ export class BeursDataProvider {
     return new Promise(resolve => {
       this.http.get('https://dacques.cloudant.com/jobbeurs/data')
         .subscribe(data => {
-          console.log(data);
+          //console.log(data);
           this.groupCompanies(data);
           resolve(this.groupedCompanies);
         },

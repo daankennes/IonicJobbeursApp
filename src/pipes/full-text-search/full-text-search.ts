@@ -15,8 +15,10 @@ export class FullTextSearchPipe implements PipeTransform {
 
     transform(value: any, input: string, searchableList : any) {
       if (input) {
+        console.log(input);
        input = input.toLowerCase();
        return value.filter(function (el: any) {
+         console.log(el);
        var isTrue = false;
        for(var k in searchableList ){
          if(el[searchableList[k]].toLowerCase().indexOf(input) > -1){
