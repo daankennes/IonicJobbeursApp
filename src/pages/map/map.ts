@@ -38,18 +38,18 @@ export class MapPage {
       maxZoom: 18
     }).addTo(this.map);*/
     this.map = leaflet.map('map', {
-      minZoom: 1,
-      maxZoom: 4,
+      minZoom: 0,
+      maxZoom: 3,
       center: [0, 0],
-      zoom: 1,
+      zoom: 0,
       crs: leaflet.CRS.Simple,
       attributionControl: false
     });
     // dimensions of the image
-    var w = 2000,
-        h = 1500,
-        //url = this.imageMap;
-        url = "./assets/imgs/map.svg";
+    var w = 2312,
+        h = 1230,
+        //url = "./assets/imgs/map.svg";
+        url = "./assets/imgs/map.png";
     // calculate the edges of the image, in coordinate space
     var southWest = this.map.unproject([0, h], this.map.getMaxZoom()-1);
     var northEast = this.map.unproject([w, 0], this.map.getMaxZoom()-1);
