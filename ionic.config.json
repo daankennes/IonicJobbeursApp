@@ -1,8 +1,8 @@
 {
   "name": "Jobbeurs",
-  "app_id": "303e5b63",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "id": "303e5b63"
 }
