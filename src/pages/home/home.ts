@@ -307,7 +307,7 @@ export class HomePage {
 
   //check if grouped company data is already available in storage, if not download the data
 
-  checkMapVersion() {
+  /*checkMapVersion() {
     return new Promise(resolve => {
       //this.http.get('https://ksawestmalle.be/version.json')
       this.http.get('assets/data/version.json')
@@ -340,15 +340,7 @@ export class HomePage {
               console.log("loading new map");
               //saveMapData();
               //saveMapVersion();
-              /*this.beursDataProv.load()
-                .then(data => {
-                  this.groupedCompanies = data;
-                  this.saveData(this.groupedCompanies);
-                  this.saveDataVersion();
-                  //console.log(data);
-                  //this.waiting = false;
-                  //this.groupCompanies(this.companies);
-              });*/
+             
               //this.jsonWorkaround();
             }
           }, (err) => {
@@ -374,7 +366,7 @@ export class HomePage {
           alert.present();
         });
     });
-  }
+  }*/
 
 
 }
