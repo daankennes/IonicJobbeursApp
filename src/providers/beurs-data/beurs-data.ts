@@ -21,7 +21,7 @@ export class BeursDataProvider {
   //use raw company array to create array grouped by first letter for presentation
   groupCompanies(companies){
 
-      companies = companies.companyinfo;
+      //companies = companies.companyinfo;
 
       let sortedCompanies = companies.sort(function(a, b) {
           return a.name.localeCompare(b.name);
@@ -35,7 +35,41 @@ export class BeursDataProvider {
 
           //value.name = value.charAt(0).toUpperCase() + value.slice(1);
 
-          for (let j = 0; j < value.categories.length; j++){
+          value.categories = [];
+
+          if (value["rood"]) {
+            if (value["rood"] === "TRUE") {
+              value.categories.push("#FE4C52");
+            }
+          }
+
+          if (value["geel"]) {
+            if (value["geel"] === "TRUE") {
+              value.categories.push("#FED035");
+            }
+          }
+
+          if (value["groen"]) {
+            if (value["groen"] === "TRUE") {
+              value.categories.push("#69BB7B");
+            }
+          }
+
+          if (value["blauw"]) {
+            if (value["blauw"] === "TRUE") {
+              value.categories.push("#0059ff");
+            }
+          }
+
+          if (value["wit"]) {
+            if (value["wit"] === "TRUE") {
+              value.categories.push("#8E8D93");
+            }
+          }
+
+          //stuk hieronder vervangen door stuk hierboven om data niet helemaal om te moeten zetten
+
+          /*for (let j = 0; j < value.categories.length; j++){
             let currentColor = value.categories[j];
 
             if (currentColor == "R")
@@ -49,7 +83,7 @@ export class BeursDataProvider {
             if (currentColor == "GR")
               value.categories[j] = "#8E8D93";
 
-          }
+          }*/
 
           if(value.name.charAt(0) != currentLetter){
 
@@ -74,7 +108,8 @@ export class BeursDataProvider {
   load() {
 
     return new Promise(resolve => {
-      this.http.get('https://dacques.cloudant.com/jobbeurs/data')
+      //this.http.get('https://ksawestmalle.be/data.json')
+      this.http.get('assets/data/newdata.json')
         .subscribe(data => {
           //console.log(data);
           this.groupCompanies(data);
