@@ -194,8 +194,8 @@ export class HomePage {
 
     checkDataVersion() {
       return new Promise(resolve => {
-        //this.http.get('https://ksawestmalle.be/version.json')
-        this.http.get('assets/data/version.json')
+        this.http.get('https://ksawestmalle.be/version.json')
+        //this.http.get('assets/data/version.json')
           .subscribe(data => {
             console.log(data);
 

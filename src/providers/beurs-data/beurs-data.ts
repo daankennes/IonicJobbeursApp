@@ -108,8 +108,8 @@ export class BeursDataProvider {
   load() {
 
     return new Promise(resolve => {
-      //this.http.get('https://ksawestmalle.be/data.json')
-      this.http.get('assets/data/newdata.json')
+      this.http.get('https://ksawestmalle.be/data.json')
+      //this.http.get('assets/data/newdata.json')
         .subscribe(data => {
           //console.log(data);
           this.groupCompanies(data);
