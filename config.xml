@@ -97,5 +97,5 @@
         <variable name="MIN_BACKGROUND_DURATION" value="30" />
     </plugin>
     <engine name="android" spec="^6.4.0" />
-    <engine name="ios" spec="~4.5.5" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
