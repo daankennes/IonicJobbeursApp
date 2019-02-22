@@ -14,7 +14,8 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 })
 export class CompaniesFilterPage {
 
-  filterNames = [{"name": "Bedrijfsmanagement, Office Management & Communicatie", "color": "#69BB7B", "lookup": "G"}, {"name": "ICT Multimedia & Grafische en Digitale Media", "color": "#FED035", "lookup": "Y"}, {"name": "Wetenschappen & Techniek", "color": "#FE4C52", "lookup": "R"}, {"name": "Toegepaste Informatica & Electronica ICT", "color": "#0059ff", "lookup": "B"}, {"name": "Gezondheid & Onderwijs", "color": "#8E8D93", "lookup": "GR"}];
+  //  filterNames = [{"name": "Bedrijfsmanagement, Office Management & Communicatie", "color": "#69BB7B", "lookup": "G"}, {"name": "ICT Multimedia & Grafische en Digitale Media", "color": "#FED035", "lookup": "Y"}, {"name": "Wetenschappen & Techniek", "color": "#FE4C52", "lookup": "R"}, {"name": "Toegepaste Informatica & Electronica ICT", "color": "#0059ff", "lookup": "B"}, {"name": "Gezondheid & Onderwijs", "color": "#8E8D93", "lookup": "GR"}];
+  filterNames = [{"name": "Bedrijfsmanagement, Office Management & Communicatie", "color": "#69BB7B", "lookup": "G"}, {"name": "ICT Multimedia & Grafische en Digitale Media", "color": "#FED035", "lookup": "Y"}, {"name": "Wetenschappen & Techniek", "color": "#FE4C52", "lookup": "R"}, {"name": "Toegepaste Informatica & Electronica ICT", "color": "#0059ff", "lookup": "B"}];
   filters: Array<{name: string, isChecked: boolean, color: string, lookup: string }> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
