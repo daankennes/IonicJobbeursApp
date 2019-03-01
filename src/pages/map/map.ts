@@ -38,7 +38,7 @@ export class MapPage {
       maxZoom: 18
     }).addTo(this.map);*/
     this.map = leaflet.map('map', {
-      minZoom: 0,
+      minZoom: -1,
       maxZoom: 3,
       center: [0, 0],
       zoom: 0,
