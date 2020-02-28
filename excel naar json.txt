@@ -1,0 +1,4 @@
+Excel bestand headers veranderen
+Excel bestand ONWAAR en WAAR naar TRUE en FALSE veranderen
+In Excel opslaan als CSV bestand
+https://www.csvjson.com/csv2json converteren

@@ -67,6 +67,12 @@ export class BeursDataProvider {
             }
           }
 
+          if (value["grijs"]) {
+            if (value["grijs"] === "TRUE") {
+              value.categories.push("#8E8D93");
+            }
+          }
+
           //stuk hieronder vervangen door stuk hierboven om data niet helemaal om te moeten zetten
 
           /*for (let j = 0; j < value.categories.length; j++){
