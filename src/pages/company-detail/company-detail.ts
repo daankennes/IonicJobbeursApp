@@ -40,6 +40,8 @@ export class CompanyDetailPage {
   			  }
         })
       })
+
+      this.company.description = this.company.description.replace(/(\r\n|\n\r|\r|\n)/gm, "<br>");;
 	  }
 
   ionViewDidLoad() {

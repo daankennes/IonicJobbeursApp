@@ -29,7 +29,7 @@
 	<b>Standnummer: </b>{{company.standno}}<br/><br/>
 
 	<b>Beschrijving:</b><br/>
-	<p ion-text color="dark">{{company.description}}</p>
+	<p ion-text color="dark" [innerHtml]="company.description"></p>
 
 	<!--<ion-icon name="md-contacts"></ion-icon>Contactinformatie:<b>Contactinformatie:</b>
   <br/>
